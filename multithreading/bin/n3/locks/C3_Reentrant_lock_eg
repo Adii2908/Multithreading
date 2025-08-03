@@ -1,0 +1,44 @@
+A reentrant lock does allow a thread that already holds the lock to acquire it again (i.e., call lock.lock() multiple times). 
+This is precisely what "reentrant" means.
+However, the "point of the lock" still holds true because:
+ * Mutual Exclusion for Other Threads: While the thread that holds the lock can re-enter, no other thread can acquire the lock 
+ until the original thread has released it the same number of times it acquired it. This is the core purpose of any lock: 
+ to ensure that only one thread (or in the case of reentrant, one thread at a time) can execute a critical section of code, 
+ thereby preventing race conditions and data corruption.
+ * Handling Recursive Calls: Reentrant locks are incredibly useful when you have methods that might directly or indirectly call 
+ other methods that also need to acquire the same lock. Without reentrancy, if a thread already held a lock and then tried to 
+ acquire it again (perhaps in a nested method call), it would deadlock itself. A reentrant lock allows this recursive acquisition to 
+ happen seamlessly.
+   Consider this example:
+   class MyResource {
+    private final ReentrantLock lock = new ReentrantLock();
+    private int counter = 0;
+
+    public void incrementAndLog() {
+        lock.lock(); // First acquisition
+        try {
+            counter++;
+            logCurrentState(); // This method also needs the lock
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    private void logCurrentState() {
+        lock.lock(); // Second acquisition by the same thread
+        try {
+            System.out.println("Current counter: " + counter);
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+ In this example, if incrementAndLog() is called, it acquires the lock. Then, inside incrementAndLog(), logCurrentState() is called,
+ which also tries to acquire the same lock. If the lock wasn't reentrant, the thread would block itself indefinitely trying to acquire
+ a lock it already holds. With a reentrant lock, it successfully acquires it a second time.
+In summary:
+The point of a reentrant lock is still to enforce mutual exclusion and protect shared resources. Its reentrancy feature is a convenience 
+and necessity for specific programming patterns (like recursive calls or methods calling other synchronized methods) that would otherwise
+ lead to deadlocks if the lock were not reentrant. It doesn't negate the fundamental purpose of the lock in preventing concurrent access
+  from different threads.
