@@ -1,6 +1,6 @@
 package basics;
 
-public class t2{
+public class t2_createThreadByInterface{
 
     public static void main(String args[]) {
 
@@ -19,7 +19,7 @@ public class t2{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Thread 3 completed");
+            System.out.println("Thread 2 completed");
         };
 
 

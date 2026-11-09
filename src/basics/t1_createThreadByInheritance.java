@@ -1,6 +1,6 @@
 package basics;
 
-public class t1 {
+public class t1_createThreadByInheritance {
     public static void main(String args[]){
         myThread mt = new myThread();
         mt.start();
