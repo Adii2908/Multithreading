@@ -9,10 +9,21 @@ public class t2{
         th.start();
 
         // Using Lambda function
-        Runnable rn1 = () ->
-                System.out.println("Thread running using runnable " + Thread.currentThread().getName());
+        Runnable rn1 = () -> {
+            System.out.println("Thread 2 started ");
+            System.out.println(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getState());
 
-        Thread th1 = new Thread(rn1);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Thread 3 completed");
+        };
+
+
+        Thread th1 = new Thread(rn1,"runnable thread");
         th1.start();
 
     }
@@ -21,6 +32,6 @@ public class t2{
 class myRunnable implements Runnable{
 
     public void run(){
-        System.out.println("Thread running using runnable "+ Thread.currentThread().getName());
+        System.out.println("Thread 1 running using runnable "+ Thread.currentThread().getName());
     }
 }
