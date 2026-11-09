@@ -4,6 +4,12 @@ public class t1 {
     public static void main(String args[]){
         myThread mt = new myThread();
         mt.start();
+
+        // Using anonymous function
+        Thread th = new Thread (() -> {
+            System.out.println("Thread running one more " + Thread.currentThread().getName());
+        });
+        th.start();
     }
 }
 
