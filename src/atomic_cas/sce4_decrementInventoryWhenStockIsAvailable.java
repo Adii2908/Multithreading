@@ -2,7 +2,7 @@ package atomic_cas;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class sce4_DecrementInventoryWhenStockIsAvailable {
+public class sce4_decrementInventoryWhenStockIsAvailable {
 
     private static final AtomicInteger inventory = new AtomicInteger(10);
 

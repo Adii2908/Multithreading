@@ -2,7 +2,7 @@ package atomic_cas;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class sce3_InceremntCounterSafelyUsing_incementAndGet {
+public class sce3_inceremntCounterSafelyUsing_incementAndGet {
 
     private static final AtomicInteger requestCount = new AtomicInteger(0);
 

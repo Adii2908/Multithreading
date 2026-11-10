@@ -2,7 +2,7 @@ package atomic_cas;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class sce5_PreventNegativeBankBalance {
+public class sce5_preventNegativeBankBalance {
 
     private static final AtomicInteger balance = new AtomicInteger(1000);
 
